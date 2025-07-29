@@ -14,6 +14,7 @@ def update_app():
     manager.apply_updates_and_restart(update_info)
 
 if __name__ == "__main__":
+    print("Starting VeloPack app...")
     # Velopack builder needs to be the first thing to run in the main process.
     # In some cases, it might quit/restart the process to perform tasks.
     velopack.App().run()
