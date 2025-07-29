@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.log
+*.db
+dist/
+build/
+*.spec
+items.json
+venv/
+*.nupkg
+*.Releases
