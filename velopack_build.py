@@ -1,3 +1,5 @@
+# velopack_build.py
+
 import os
 import sys
 import subprocess
@@ -15,9 +17,9 @@ def run_command(cmd):
         sys.exit(1)
     return result
 
-# Build with PyInstaller using current Python
+# Use the current python interpreter to run PyInstaller
 python_exe = sys.executable
-run_command([python_exe, '-m', 'PyInstaller', '--onefile', '--name=MyApp', 'update_checker.py'])
+run_command([python_exe, '-m', 'PyInstaller', '--name=MyApp', '--onefile', 'update_checker.py'])
 
 # Prepare Velopack package
 version = datetime.now().strftime("%Y.%m.%d.%H%M")
@@ -26,10 +28,12 @@ channel = "stable"
 
 # Create Velopack package
 run_command([
-    'velo-pack', '--pack',
-    f'--dir=dist',
-    f'--version={version}',
-    f'--notes="{release_notes}"',
+    'velo-pack', 'pack',
+    '--packId=MyApp',
+    f'--packVersion={version}',
+    f'--packDirectory=dist',
+    '--mainExe=MyApp.exe',
+    f'--releaseNotes="{release_notes}"',
     f'--channel={channel}'
 ])
 
@@ -40,8 +44,9 @@ release_info = {
     "notes": release_notes
 }
 
+# Place the RELEASES.json in the correct output directory
 with open('dist/RELEASES.json', 'w') as f:
     json.dump(release_info, f)
 
 print(f"Build complete: Version {version}")
-print("Upload .nupkg from dist/ folder to GitHub Releases")
+print("Upload .nupkg from the 'dist' folder to your GitHub Releases")
