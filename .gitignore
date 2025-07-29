@@ -9,3 +9,4 @@ items.json
 venv/
 *.nupkg
 *.Releases
+velopack_env/
