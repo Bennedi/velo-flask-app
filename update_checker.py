@@ -15,7 +15,7 @@ def run_update_check():
         subprocess.run([
             update_exe,
             '--update',
-            'https://github.com/Bennedi/velo-flask-app/releases/latest/download',
+            'https://github.com/Bennedi/velo-flask-app/',
             '--waitForExit'
         ], check=True)
         print("Update applied successfully. Restarting...")
